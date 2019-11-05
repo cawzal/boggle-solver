@@ -4,7 +4,7 @@
 #include <string>
 
 struct TrieNode {
-    TrieNode* children[26]{};
+    TrieNode* children[26] {};
     bool terminator = false;
 };
 

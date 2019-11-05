@@ -7,10 +7,12 @@ Command line boggle solver. Output will depend on file of words provided.
 ### Arguments
 
 ```
-executable.exe <file-of-words> <characters-to-search>
+executable.exe file characters
 ```
 
-File of words must be lowercase and contain only characters. Words that don't meet this requirement are ignored along with words that are less than 3 characters long. Characters to search provided must also be lowercase and have an appropriate length. This length must be the result of a boggle board that has the same width and height. For example, 16 characters for a 4x4 board or 25 characters for a 5x5 board.
+File contains list of words to look for. Words must be lowercase and contain only characters. Any words that don't meet this requirement are ignored along with words that are less than 3 characters long.
+
+Characters is the boggle board to search. This must be lowercase and have an appropriate length. This length must be the result of a boggle board that has the same width and height. For example, 16 characters for a 4x4 board or 25 characters for a 5x5 board.
 
 ### Example (Building)
 

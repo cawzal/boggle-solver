@@ -20,11 +20,11 @@ private:
     Trie* trie;
     std::vector<BoardNode*> nodes;
 public:
-    Board(std::string str);
-    void find(Trie* trie, std::set<std::string>& words);
+    Board(std::string chars, Trie* trie);
+    std::set<std::string> find();
 private:
-    void generate(std::string str);
-    void search(Trie* trie, std::string str, BoardNode* node, std::set<std::string>& words);
+    void generate(std::string chars);
+    void search(std::string str, BoardNode* node, std::set<std::string>& found);
 };
 
 #endif

@@ -41,19 +41,17 @@ int main(int argc, char **argv) {
     }
     file.close();
 
-    std::set<std::string> words;
-    Board board(chars);
-    board.find(&trie, words);
-
-    std::cout << "Words: " << words.size() << "\n";
+    Board board(chars, &trie);
+    std::set<std::string> found = board.find();
+    
+    std::cout << "Found: " << found.size() << "\n";
     int counter = 0;
-    for (const std::string& word : words) {
+    for (const std::string& word : found) {
         counter++;
         std::cout << std::left << std::setw(20) << word;
         if (counter % 5 == 0)
             std::cout << "\n";
     }
-
     if (counter % 5 != 0)
         std::cout << "\n";
 

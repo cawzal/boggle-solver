@@ -6,18 +6,21 @@
 
 #include "Board.h"
 
-Board::Board(std::string str) {
-    this->size = std::sqrt(str.length());
-    this->generate(str);
+Board::Board(std::string chars, Trie* trie) {
+    this->size = std::sqrt(chars.length());
+    this->trie = trie;
+    this->generate(chars);
 }
 
-void Board::find(Trie* trie, std::set<std::string>& words) {
+std::set<std::string> Board::find() {
+    std::set<std::string> found;
     std::string empty = "";
     for (BoardNode* root : this->nodes) {
         root->visited = true;
-        search(trie, empty + root->character, root, words);
+        search(empty + root->character, root, found);
         root->visited = false;
     }
+    return found;
 }
 
 void Board::generate(std::string str) {
@@ -43,17 +46,17 @@ void Board::generate(std::string str) {
     }
 }
 
-void Board::search(Trie* trie, std::string str, BoardNode* node, std::set<std::string>& words) {
-    if (!trie->prefix(str))
+void Board::search(std::string str, BoardNode* node, std::set<std::string>& found) {
+    if (!this->trie->prefix(str))
         return;
 
-    if (trie->contains(str))
-        words.insert(str);
+    if (this->trie->contains(str))
+        found.insert(str);
 
     for (BoardNode* neighbour : node->neighbours) {
         if (!neighbour->visited) {
             neighbour->visited = true;
-            search(trie, str + neighbour->character, neighbour, words);
+            search(str + neighbour->character, neighbour, found);
             neighbour->visited = false;
         }
     }
