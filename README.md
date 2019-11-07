@@ -4,21 +4,16 @@
 
 Command line boggle solver. Output will depend on file of words provided.
 
-### Arguments
+### Program Arguments
 
 ```
-executable.exe file characters
+program.exe file characters
 ```
 
-File contains list of words to look for. Words must be lowercase and contain only characters. Any words that don't meet this requirement are ignored along with words that are less than 3 characters long.
+File contains list of words to look for. Words must be lowercase and contain only characters. Words that don't meet this requirement or are less then 3 characters long are ignored.
 
-Characters is the boggle board to search. This must be lowercase and have an appropriate length. This length must be the result of a boggle board that has the same width and height. For example, 16 characters for a 4x4 board or 25 characters for a 5x5 board.
+Characters is the boggle board to search. Must contain only alphabetic characters. Length must be the result of a boggle board that has the same width and height. For example, 16 characters for a 4x4 board or 25 characters for a 5x5 board.
 
-### Example (Building)
-
-```
-g++ -o main main.cpp Board.cpp Trie.cpp
-```
 
 ### Example (Usage)
 

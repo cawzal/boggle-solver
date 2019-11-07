@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 #include <set>
 #include <string>
 #include <vector>
@@ -16,17 +15,16 @@ std::set<std::string> Board::find() {
     std::set<std::string> found;
     std::string empty = "";
     for (BoardNode* root : this->nodes) {
-        root->visited = true;
-        search(empty + root->character, root, found);
-        root->visited = false;
+        root->setVisited(true);
+        search(empty + root->getCharacter(), root, found);
+        root->setVisited(false);
     }
     return found;
 }
 
 void Board::generate(std::string str) {
     for (unsigned i = 0; i < str.length(); i++) {
-        BoardNode* node = new BoardNode();
-        node->character = str.at(i);
+        BoardNode* node = new BoardNode(str.at(i));
         nodes.push_back(node);
     }
     for (unsigned i = 0; i < str.length(); i++) {
@@ -38,8 +36,8 @@ void Board::generate(std::string str) {
                 if (y == row && x == col)
                     continue;
                 if (y >= 0 && y < this->size && x >= 0 && x < this->size) {
-                    int position = y * this->size + x;
-                    node->neighbours.push_back(nodes.at(position));
+                    int pos = y * this->size + x;
+                    node->addNeighbour(this->nodes.at(pos));
                 }
             }
         }
@@ -53,11 +51,11 @@ void Board::search(std::string str, BoardNode* node, std::set<std::string>& foun
     if (this->trie->contains(str))
         found.insert(str);
 
-    for (BoardNode* neighbour : node->neighbours) {
-        if (!neighbour->visited) {
-            neighbour->visited = true;
-            search(str + neighbour->character, neighbour, found);
-            neighbour->visited = false;
+    for (BoardNode* neighbour : node->getNeighbours()) {
+        if (!neighbour->getVisited()) {
+            neighbour->setVisited(true);
+            search(str + neighbour->getCharacter(), neighbour, found);
+            neighbour->setVisited(false);
         }
     }
 }

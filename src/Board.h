@@ -1,18 +1,12 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <iostream>
 #include <set>
 #include <string>
 #include <vector>
 
+#include "BoardNode.h"
 #include "Trie.h"
-
-struct BoardNode {
-    char character;
-    bool visited = false;
-    std::vector<BoardNode*> neighbours;
-};
 
 class Board {
 private:

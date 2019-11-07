@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -7,10 +8,11 @@
 #include <string>
 
 #include "Board.h"
+#include "Trie.h"
 
 int main(int argc, char **argv) {
     if (argc != 3)  {
-        std::cout << "Error: Inputs not specified\n";
+        std::cout << "Error: Inputs not properly specified\n";
         return 0;
     }
 
@@ -26,13 +28,16 @@ int main(int argc, char **argv) {
         std::cout << "Error: Invalid length of characters provided\n";
         return 0;
     }
-    
-    std::regex exprc("[a-z]+");
+
+    std::regex exprc("[a-zA-Z]+");
     if (!std::regex_match(chars, exprc)) {
         std::cout << "Error: Invalid characters provided\n";
         return 0;
     }
-    
+    std::transform(chars.begin(), chars.end(), chars.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+
     Trie trie;
     std::regex exprw("[a-z]{3,}");
     for (std::string word; getline(file, word);) {
